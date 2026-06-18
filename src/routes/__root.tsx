@@ -14,6 +14,8 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { FloatingContact } from "@/components/site/FloatingContact";
 import { Toaster } from "@/components/ui/sonner";
+import { LeadProfileProvider } from "@/lib/lead-profile";
+import { LeadCaptureModal } from "@/components/site/LeadCaptureModal";
 
 function NotFoundComponent() {
   return (
@@ -101,15 +103,18 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col bg-background">
-        <SiteHeader />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <SiteFooter />
-        <FloatingContact />
-        <Toaster />
-      </div>
+      <LeadProfileProvider>
+        <div className="flex min-h-screen flex-col bg-background">
+          <SiteHeader />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+          <SiteFooter />
+          <FloatingContact />
+          <LeadCaptureModal />
+          <Toaster />
+        </div>
+      </LeadProfileProvider>
     </QueryClientProvider>
   );
 }
