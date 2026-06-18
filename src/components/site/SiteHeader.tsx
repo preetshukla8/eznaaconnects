@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import { UserProfileMenu } from "./UserProfileMenu";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -29,13 +30,16 @@ export function SiteHeader() {
       }`}
     >
       <div className="container-page flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-display text-lg">E</span>
-          <span className="flex flex-col leading-tight">
-            <span className="font-display text-base font-bold text-primary">Eznaa Connects</span>
-            <span className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground">Business Solutions</span>
-          </span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-2.5">
+            <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-display text-lg">E</span>
+            <span className="flex flex-col leading-tight">
+              <span className="font-display text-base font-bold text-primary">Eznaa Connects</span>
+              <span className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground">Business Solutions</span>
+            </span>
+          </Link>
+          <UserProfileMenu />
+        </div>
 
         <nav className="hidden items-center gap-1 md:flex">
           {NAV.map((item) => (
