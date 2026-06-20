@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Quote, ShieldCheck, Star } from "lucide-react";
-import { LeadForm } from "@/components/site/LeadForm";
 import { ServicesGrid, TrustStrip, StatsBand, ProcessSteps, CtaBand } from "@/components/site/SiteSections";
 import { openConsultationChat } from "@/components/site/ConsultationChat";
+import heroAdvisor from "@/assets/hero-advisor.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,7 +25,7 @@ function HomePage() {
           <div className="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-secondary blur-3xl opacity-60" />
           <div className="absolute top-20 right-0 h-80 w-80 rounded-full bg-gold/15 blur-3xl" />
         </div>
-        <div className="container-page grid gap-12 pt-12 pb-16 md:pt-20 md:pb-24 lg:grid-cols-[1.25fr_1fr]">
+        <div className="container-page grid gap-12 pt-12 pb-16 md:pt-20 md:pb-24 lg:grid-cols-[1.25fr_1fr] lg:items-center">
           <div className="flex flex-col justify-center">
             <p className="eyebrow-gold"><ShieldCheck className="h-3.5 w-3.5" /> Trusted UAE corporate advisors</p>
             <h1 className="mt-4 font-display text-4xl font-bold leading-[1.1] text-primary md:text-6xl">
@@ -54,8 +54,25 @@ function HomePage() {
             </div>
           </div>
 
-          <div id="enquire" className="lg:pl-4">
-            <LeadForm />
+          <div className="relative lg:pl-4">
+            <div className="absolute -top-4 -left-4 hidden h-full w-full rounded-2xl border border-gold/30 lg:block" />
+            <div className="absolute -bottom-4 -right-4 hidden h-full w-full rounded-2xl bg-secondary lg:block" />
+            <img
+              src={heroAdvisor}
+              alt="Senior Eznaa Connects business advisor in Dubai"
+              width={1024}
+              height={1280}
+              className="relative w-full rounded-2xl object-cover shadow-2xl"
+            />
+            <div className="absolute bottom-6 left-6 right-6 z-10 rounded-xl bg-background/95 p-4 shadow-lift backdrop-blur md:left-8 md:right-8">
+              <div className="flex items-center gap-3">
+                <div className="grid h-10 w-10 place-items-center rounded-full bg-gold text-primary text-sm font-bold">SA</div>
+                <div>
+                  <p className="text-sm font-semibold text-primary">Sara Al Mansoori</p>
+                  <p className="text-xs text-muted-foreground">Senior Business Advisor · 12+ yrs UAE experience</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

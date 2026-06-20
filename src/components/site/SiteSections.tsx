@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Building2, FileCheck2, Landmark, ShieldCheck, Sparkles, BadgeCheck, Users, Clock, Globe2 } from "lucide-react";
-import { LeadForm } from "@/components/site/LeadForm";
+import { ConsultationRequest } from "@/components/site/ConsultationRequest";
+import { openConsultationChat } from "@/components/site/ConsultationChat";
 
 export const SERVICES = [
   {
@@ -130,8 +131,8 @@ export function CtaBand({ title = "Ready to start your UAE business?", note = "T
             <p className="mt-1 text-sm text-muted-foreground">{note}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-primary">Book free consultation</Link>
-            <a href="https://wa.me/971500000000" target="_blank" rel="noreferrer" className="btn-outline">WhatsApp us</a>
+            <button type="button" onClick={openConsultationChat} className="btn-primary">Book free consultation</button>
+            <a href="https://wa.me/971552365373" target="_blank" rel="noreferrer" className="btn-outline">WhatsApp us</a>
           </div>
         </div>
       </div>
@@ -161,12 +162,12 @@ export function ServicePageTemplate({
             <h1 className="mt-3 font-display text-3xl font-bold leading-tight md:text-5xl">{title}</h1>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{intro}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#enquire" className="btn-primary">Get a quote</a>
-              <a href="tel:+97140000000" className="btn-outline">Call an advisor</a>
+              <button type="button" onClick={openConsultationChat} className="btn-primary">Get a quote</button>
+              <a href="tel:+971552365373" className="btn-outline">Call an advisor</a>
             </div>
           </div>
           <div id="enquire" className="lg:sticky lg:top-24">
-            <LeadForm defaultService={defaultService} title="Free quote in 1 hour" subtitle="Senior consultant — not a call center." />
+            <ConsultationRequest defaultService={defaultService} title="Free quote in 1 hour" subtitle="Senior consultant — not a call center." />
           </div>
         </div>
       </section>

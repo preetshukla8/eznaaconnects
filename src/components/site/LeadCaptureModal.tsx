@@ -34,7 +34,7 @@ export function LeadCaptureModal() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 400));
     saveProfile({
       name: String(fd.get("name") || ""),
       email: String(fd.get("email") || ""),
@@ -43,18 +43,14 @@ export function LeadCaptureModal() {
       message: String(fd.get("message") || ""),
     });
     setSubmitting(false);
-    toast.success(editing ? "Profile updated" : "Thanks — our advisor will reach out shortly.");
+    toast.success(editing ? "Profile updated" : "Welcome to Eznaa — our advisor will reach out shortly.");
   }
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm animate-in fade-in" onClick={closeModal} />
       <div className="relative w-full max-w-lg overflow-hidden rounded-t-2xl sm:rounded-2xl bg-card shadow-2xl animate-in slide-in-from-bottom-6 sm:zoom-in-95">
-        <button
-          aria-label="Close"
-          onClick={closeModal}
-          className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-secondary/80 text-foreground/70 hover:bg-secondary"
-        >
+        <button aria-label="Close" onClick={closeModal} className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-secondary/80 text-foreground/70 hover:bg-secondary">
           <X className="h-4 w-4" />
         </button>
 
@@ -73,30 +69,19 @@ export function LeadCaptureModal() {
         <form onSubmit={onSubmit} className="px-6 py-5 sm:px-8 sm:py-6">
           <div className="grid gap-3">
             <Field name="name" label="Full name" required defaultValue={profile?.name} placeholder="John Smith" />
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Field name="email" type="email" label="Email" required defaultValue={profile?.email} placeholder="you@company.com" />
-              <Field name="phone" type="tel" label="Phone / WhatsApp" required defaultValue={profile?.phone} placeholder="+971 50 000 0000" />
-            </div>
+            <Field name="email" type="email" label="Email" required defaultValue={profile?.email} placeholder="you@company.com" />
+            <Field name="phone" type="tel" label="Phone / WhatsApp (include country code)" required defaultValue={profile?.phone} placeholder="+971 55 236 5373" />
+            <p className="-mt-1.5 text-[11px] text-muted-foreground">We accept numbers from any country — please include the country code (e.g. +44, +1, +91).</p>
             <label className="flex flex-col gap-1.5">
               <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Service interested in</span>
-              <select
-                name="service"
-                defaultValue={profile?.service ?? ""}
-                className="h-11 rounded-md border border-input bg-card px-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
-              >
+              <select name="service" defaultValue={profile?.service ?? ""} className="h-11 rounded-md border border-input bg-card px-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30">
                 <option value="" disabled>Select a service…</option>
                 {SERVICES.map((o) => <option key={o} value={o}>{o}</option>)}
               </select>
             </label>
             <label className="flex flex-col gap-1.5">
               <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Tell us briefly</span>
-              <textarea
-                name="message"
-                rows={2}
-                defaultValue={profile?.message}
-                placeholder="Activity, jurisdiction preference, timeline…"
-                className="rounded-md border border-input bg-card px-3.5 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
-              />
+              <textarea name="message" rows={2} defaultValue={profile?.message} placeholder="Activity, jurisdiction preference, timeline…" className="rounded-md border border-input bg-card px-3.5 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30" />
             </label>
           </div>
 
@@ -118,14 +103,7 @@ function Field({ label, name, type = "text", required, placeholder, defaultValue
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">{label}</span>
-      <input
-        name={name}
-        type={type}
-        required={required}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        className="h-11 rounded-md border border-input bg-card px-3.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
-      />
+      <input name={name} type={type} required={required} defaultValue={defaultValue} placeholder={placeholder} className="h-11 rounded-md border border-input bg-card px-3.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30" />
     </label>
   );
 }
