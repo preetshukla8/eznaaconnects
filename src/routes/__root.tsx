@@ -16,6 +16,7 @@ import { FloatingContact } from "@/components/site/FloatingContact";
 import { Toaster } from "@/components/ui/sonner";
 import { LeadProfileProvider } from "@/lib/lead-profile";
 import { LeadCaptureModal } from "@/components/site/LeadCaptureModal";
+import { ConsultationChat } from "@/components/site/ConsultationChat";
 
 function NotFoundComponent() {
   return (
@@ -112,6 +113,7 @@ function RootComponent() {
           <SiteFooter />
           <FloatingContact />
           <LeadCaptureModal />
+          <ConsultationChat />
           <Toaster />
         </div>
       </LeadProfileProvider>
