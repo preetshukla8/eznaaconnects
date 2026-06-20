@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Quote, ShieldCheck, Star } from "lucide-react";
 import { LeadForm } from "@/components/site/LeadForm";
 import { ServicesGrid, TrustStrip, StatsBand, ProcessSteps, CtaBand } from "@/components/site/SiteSections";
+import { openConsultationChat } from "@/components/site/ConsultationChat";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,7 +35,7 @@ function HomePage() {
               Eznaa Connects handles your company formation, visas, VAT &amp; Corporate Tax, accounting and compliance — across Mainland, all 50+ Freezones and Offshore — so you can focus on the business.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href="#enquire" className="btn-gold">Get free consultation <ArrowRight className="h-4 w-4" /></a>
+              <button type="button" onClick={openConsultationChat} className="btn-gold">Get free consultation <ArrowRight className="h-4 w-4" /></button>
               <Link to="/services" className="btn-outline">Explore services</Link>
             </div>
             <div className="mt-8 flex items-center gap-4">
