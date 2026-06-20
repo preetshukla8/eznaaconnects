@@ -1,7 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
-import { UserProfileMenu } from "./UserProfileMenu";
+import { AccountMenu } from "./AccountMenu";
+import { openConsultationChat } from "./ConsultationChat";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -9,6 +10,8 @@ const NAV = [
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
+
+const PHONE = "+971552365373";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -31,14 +34,14 @@ export function SiteHeader() {
     >
       <div className="container-page flex h-16 items-center justify-between md:h-20">
         <div className="flex items-center gap-3">
+          <AccountMenu />
           <Link to="/" className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-md bg-primary text-primary-foreground font-display text-lg">E</span>
-            <span className="flex flex-col leading-tight">
+            <span className="hidden sm:flex flex-col leading-tight">
               <span className="font-display text-base font-bold text-primary">Eznaa Connects</span>
               <span className="text-[10px] tracking-[0.22em] uppercase text-muted-foreground">Business Solutions</span>
             </span>
           </Link>
-          <UserProfileMenu />
         </div>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -56,10 +59,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <a href="tel:+97140000000" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
-            <Phone className="h-4 w-4" /> +971 4 000 0000
+          <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+            <Phone className="h-4 w-4" /> {PHONE}
           </a>
-          <Link to="/contact" className="btn-gold">Free Consultation</Link>
+          <button type="button" onClick={openConsultationChat} className="btn-gold">Free Consultation</button>
         </div>
 
         <button
@@ -85,7 +88,10 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <Link to="/contact" className="btn-gold mt-2">Free Consultation</Link>
+            <a href={`tel:${PHONE}`} className="rounded-md px-3 py-2.5 text-sm font-semibold text-primary">
+              Call {PHONE}
+            </a>
+            <button type="button" onClick={openConsultationChat} className="btn-gold mt-2">Free Consultation</button>
           </div>
         </div>
       )}

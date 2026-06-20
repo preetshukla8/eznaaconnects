@@ -1,6 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
 
+const PHONE = "+971552365373";
+const EMAIL = "eznaaglobalmart@gmail.com";
+
 const COL_SERVICES = [
   { to: "/services/company-setup", label: "Company Setup" },
   { to: "/services/visa-services", label: "Visa Services" },
@@ -10,7 +13,8 @@ const COL_SERVICES = [
 const COL_COMPANY = [
   { to: "/about", label: "About Us" },
   { to: "/services", label: "All Services" },
-  { to: "/contact", label: "Contact" },
+  { to: "/contact", label: "Contact / Grievance" },
+  { to: "/profile", label: "My Account" },
 ];
 
 export function SiteFooter() {
@@ -48,9 +52,9 @@ export function SiteFooter() {
         <div>
           <h4 className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Get in touch</h4>
           <ul className="space-y-2.5 text-sm text-foreground/80">
-            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-gold" /> <a href="tel:+97140000000">+971 4 000 0000</a></li>
-            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-gold" /> <a href="mailto:hello@eznaaconnects.ae">hello@eznaaconnects.ae</a></li>
-            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-gold" /> Business Bay, Dubai, UAE</li>
+            <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 text-gold" /> <a href={`tel:${PHONE}`}>{PHONE}</a></li>
+            <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 text-gold" /> <a href={`mailto:${EMAIL}`} className="break-all">{EMAIL}</a></li>
+            <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 text-gold" /> UAE</li>
           </ul>
         </div>
       </div>
