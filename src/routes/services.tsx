@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ServicesGrid, CtaBand } from "@/components/site/SiteSections";
-import { LeadForm } from "@/components/site/LeadForm";
+import { ConsultationRequest } from "@/components/site/ConsultationRequest";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -44,7 +44,7 @@ function ServicesPage() {
               Share a few details and a senior consultant will recommend the right jurisdiction, license type and compliance setup — free of charge.
             </p>
           </div>
-          <LeadForm title="Request a recommendation" subtitle="Reply within 1 business hour." />
+          <ConsultationRequest title="Request a recommendation" subtitle="Reply within 1 business hour." />
         </div>
       </section>
 
