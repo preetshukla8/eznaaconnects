@@ -64,15 +64,6 @@ function HomePage() {
               height={1280}
               className="relative w-full rounded-2xl object-cover shadow-2xl"
             />
-            <div className="absolute bottom-6 left-6 right-6 z-10 rounded-xl bg-background/95 p-4 shadow-lift backdrop-blur md:left-8 md:right-8">
-              <div className="flex items-center gap-3">
-                <div className="grid h-10 w-10 place-items-center rounded-full bg-gold text-primary text-sm font-bold">SA</div>
-                <div>
-                  <p className="text-sm font-semibold text-primary">Sara Al Mansoori</p>
-                  <p className="text-xs text-muted-foreground">Senior Business Advisor · 12+ yrs UAE experience</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 

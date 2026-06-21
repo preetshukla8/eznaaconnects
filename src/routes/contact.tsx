@@ -4,7 +4,7 @@ import { GrievancePortal } from "@/components/site/GrievancePortal";
 
 const PHONE = "+971552365373";
 const WA = "971552365373";
-const EMAIL = "eznaaglobalmart@gmail.com";
+const EMAIL = "eznaaconnect@gmail.com";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
