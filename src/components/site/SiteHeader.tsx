@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { AccountMenu } from "./AccountMenu";
 import { openConsultationChat } from "./ConsultationChat";
-import eznaaLogo from "@/assets/eznaa-logo.png.asset.json";
+import { Logo } from "./Logo";
 
 const NAV = [
   { to: "/", label: "Home" },

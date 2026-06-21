@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin } from "lucide-react";
-import eznaaLogo from "@/assets/eznaa-logo.png.asset.json";
+import { Logo } from "./Logo";
 
 const EMAIL = "eznaaconnect@gmail.com";
 const UAE_PHONE = "+971552365373";
