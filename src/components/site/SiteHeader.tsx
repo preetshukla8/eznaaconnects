@@ -36,8 +36,8 @@ export function SiteHeader() {
       <div className="container-page flex h-16 items-center justify-between md:h-20">
         <div className="flex items-center gap-3">
           <AccountMenu />
-          <Link to="/" className="flex items-center gap-2.5" aria-label="Eznaa Connect — Global Business Services UAE">
-            <img src={eznaaLogo.url} alt="Eznaa Connect — Global Business Services UAE" className="h-10 w-auto md:h-12" />
+          <Link to="/" aria-label="Eznaa Connect — Global Business Services UAE">
+            <Logo />
           </Link>
         </div>
 
