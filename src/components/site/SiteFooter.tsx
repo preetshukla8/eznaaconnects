@@ -24,7 +24,7 @@ export function SiteFooter() {
     <footer className="mt-12 border-t border-border bg-surface-deep">
       <div className="container-page grid gap-10 py-14 md:grid-cols-4">
         <div className="space-y-3">
-          <img src={eznaaLogo.url} alt="Eznaa Connect" className="h-12 w-auto" />
+          <Logo />
           <p className="text-sm text-muted-foreground">
             End-to-end business setup, visa, tax and compliance services across the UAE — Mainland, Freezones and Offshore.
           </p>
