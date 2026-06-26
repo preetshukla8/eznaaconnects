@@ -4,6 +4,7 @@ import { Logo } from "./Logo";
 
 const EMAIL = "eznaaconnect@gmail.com";
 const UAE_PHONE = "+971552365373";
+const UAE_PHONE_2 = "+9715586671162";
 const IN_PHONE = "+919799039611";
 
 const COL_SERVICES = [
@@ -56,6 +57,7 @@ export function SiteFooter() {
               <ul className="space-y-2">
                 <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> Dubai Business Bay, United Arab Emirates</li>
                 <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> <a href={`tel:${UAE_PHONE}`}>{UAE_PHONE}</a></li>
+                <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> <a href={`tel:${UAE_PHONE_2}`}>{UAE_PHONE_2}</a></li>
                 <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> <a href={`mailto:${EMAIL}`} className="break-all">{EMAIL}</a></li>
               </ul>
             </div>
@@ -63,7 +65,7 @@ export function SiteFooter() {
               <div className="mb-2 font-display text-sm font-bold text-primary">India Operations</div>
               <ul className="space-y-2">
                 <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> 1439 Omaxe City Phase 2, Ajmer Road, Jaipur, India</li>
-                <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> <a href={`tel:${IN_PHONE}`}>Contact Us {IN_PHONE}</a></li>
+                <li className="flex items-start gap-2"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> <a href={`tel:${IN_PHONE}`}>{IN_PHONE}</a></li>
                 <li className="flex items-start gap-2"><Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" /> <a href={`mailto:${EMAIL}`} className="break-all">{EMAIL}</a></li>
               </ul>
             </div>
