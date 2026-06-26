@@ -1,64 +1,172 @@
-import { Link } from "@tanstack/react-router";
-import { ArrowRight, Building2, FileCheck2, Landmark, ShieldCheck, Sparkles, BadgeCheck, Users, Clock, Globe2 } from "lucide-react";
+import { useState } from "react";
+
+import { ArrowRight, Building2, FileCheck2, Landmark, ShieldCheck, Sparkles, BadgeCheck, Users, Clock, Globe2, FileText, Link2, MessageCircle, X } from "lucide-react";
 import { ConsultationRequest } from "@/components/site/ConsultationRequest";
 import { openConsultationChat } from "@/components/site/ConsultationChat";
 
+const WHATSAPP_URL = "https://wa.me/971552365373";
+
 export const SERVICES = [
   {
-    slug: "/services/company-setup",
-    icon: Building2,
-    title: "Company Setup",
-    blurb: "Mainland, Freezone and Offshore formation — license, trade name, MOA, banking.",
-    bullets: ["50+ Freezones", "DED Mainland", "100% ownership options"],
-  },
-  {
-    slug: "/services/visa-services",
-    icon: Users,
-    title: "Visa Services",
-    blurb: "Investor, Employee, Family and Golden Visas with PRO and Emirates ID handling.",
-    bullets: ["Investor & Partner", "Employee & Family", "Golden Visa"],
+    slug: "/services/tax-vat-ct",
+    icon: FileText,
+    title: "VAT Registration",
+    blurb: "Get your business VAT-registered with the FTA and start charging & reclaiming the 5% VAT.",
+    bullets: ["Charge 5% VAT on sales", "Reclaim VAT on purchases", "Required by most B2B clients"],
+    details: {
+      intro: "Once registered for VAT with the Federal Tax Authority, your company becomes a credible B2B vendor — most established companies prefer to deal only with VAT-registered businesses.",
+      points: [
+        "You can charge 5% VAT on every sales invoice issued to your customers.",
+        "You are eligible to claim back the 5% VAT paid to your suppliers at the time of filing your VAT return.",
+        "Most established companies only collaborate with VAT-registered business partners.",
+        "We handle the full FTA application, TRN issuance and EmaraTax onboarding.",
+      ],
+    },
   },
   {
     slug: "/services/tax-vat-ct",
     icon: Landmark,
-    title: "VAT & Corporate Tax",
-    blurb: "FTA-aligned VAT and 9% Corporate Tax registration, filing and advisory.",
-    bullets: ["VAT registration", "CT registration", "Filing & advisory"],
+    title: "Corporate Tax Registration",
+    blurb: "Mandatory FTA Corporate Tax registration for every UAE company — no threshold applies.",
+    bullets: ["Mandatory for all UAE companies", "Avoid AED 10,000 FTA penalty", "Required from day one"],
+    details: {
+      intro: "Corporate Tax registration is mandatory for every UAE company — there is no minimum revenue or threshold limit. Newly licensed companies must register immediately, even if the trade license was issued only yesterday.",
+      points: [
+        "Mandatory for every UAE company — Mainland, Freezone and Offshore.",
+        "The Federal Tax Authority imposes a penalty of AED 10,000 if you fail to register before the deadline.",
+        "Newly licensed companies must register immediately upon receiving the trade license.",
+        "We prepare and file the full Corporate Tax registration on EmaraTax on your behalf.",
+      ],
+    },
+  },
+  {
+    slug: "/services/company-setup",
+    icon: Building2,
+    title: "Custom Registration",
+    blurb: "Get your Import / Export Code for Dubai — the gateway to international trade.",
+    bullets: ["Import & Export Code", "Dubai Customs portal", "Trade-ready in days"],
+    details: {
+      intro: "Customs Registration gives your company an Import & Export Code, allowing you to legally import goods into Dubai and export to international markets.",
+      points: [
+        "Issuance of Import & Export Code for Dubai.",
+        "Full Dubai Customs portal registration and account activation.",
+        "Required for any company moving physical goods in or out of the UAE.",
+        "End-to-end document handling — no need to visit Customs in person.",
+      ],
+    },
   },
   {
     slug: "/services/accounting-compliance",
-    icon: ShieldCheck,
-    title: "Accounting & Compliance",
-    blurb: "Bookkeeping, audit support, AML / UBO / ESR — keep your business in good standing.",
-    bullets: ["Bookkeeping", "Statutory audit", "AML / UBO / ESR"],
+    icon: Link2,
+    title: "Customs Linking",
+    blurb: "Link your VAT TRN with the Customs portal so you can reclaim 5% VAT on imports.",
+    bullets: ["Link TRN ↔ Customs code", "Reclaim VAT on imports", "FTA-aligned setup"],
+    details: {
+      intro: "Customs Linking connects your VAT TRN (Tax Registration Number) with the Dubai Customs portal and your Customs Code with the FTA portal — unlocking VAT reclaims on imports.",
+      points: [
+        "Link your VAT TRN inside the Dubai Customs portal.",
+        "Link your Customs Code inside the FTA / EmaraTax portal.",
+        "Once linked, you can claim back the 5% VAT paid on imports during your VAT return filing.",
+        "Critical for any business importing goods — protects your cashflow.",
+      ],
+    },
   },
 ] as const;
 
 export function ServicesGrid() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const active = openIdx !== null ? SERVICES[openIdx] : null;
+
   return (
-    <div className="grid gap-5 md:grid-cols-2">
-      {SERVICES.map((s) => (
-        <Link key={s.slug} to={s.slug} className="card-soft group p-6 transition hover:-translate-y-0.5 hover:shadow-lift">
-          <div className="flex items-start gap-4">
-            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-secondary text-primary">
-              <s.icon className="h-6 w-6" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-display text-xl font-bold text-primary">{s.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.blurb}</p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">
-                {s.bullets.map((b) => (
-                  <li key={b} className="rounded-full border border-border bg-surface px-2.5 py-0.5 text-[11px] font-medium text-foreground/80">{b}</li>
-                ))}
-              </ul>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:text-foreground">
-                Learn more <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </span>
+    <>
+      <div className="grid gap-5 md:grid-cols-2">
+        {SERVICES.map((s, i) => (
+          <div key={s.title} className="card-soft group p-6 transition hover:-translate-y-0.5 hover:shadow-lift">
+            <div className="flex items-start gap-4">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-secondary text-primary">
+                <s.icon className="h-6 w-6" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-display text-xl font-bold text-primary">{s.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.blurb}</p>
+                <ul className="mt-3 flex flex-wrap gap-1.5">
+                  {s.bullets.map((b) => (
+                    <li key={b} className="rounded-full border border-border bg-surface px-2.5 py-0.5 text-[11px] font-medium text-foreground/80">{b}</li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  onClick={() => setOpenIdx(i)}
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-foreground"
+                >
+                  Learn more <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                </button>
+              </div>
             </div>
           </div>
-        </Link>
-      ))}
-    </div>
+        ))}
+      </div>
+
+      {active && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[120] flex items-end justify-center bg-black/60 p-0 md:items-center md:p-6"
+          onClick={() => setOpenIdx(null)}
+        >
+          <div
+            className="relative w-full max-w-xl overflow-hidden rounded-t-2xl bg-card shadow-2xl md:rounded-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={() => setOpenIdx(null)}
+              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-border bg-background text-foreground/70 hover:text-primary"
+            >
+              <X className="h-4 w-4" />
+            </button>
+            <div className="p-6 md:p-8">
+              <div className="flex items-center gap-3">
+                <div className="grid h-12 w-12 place-items-center rounded-lg bg-secondary text-primary">
+                  <active.icon className="h-6 w-6" />
+                </div>
+                <div>
+                  <p className="eyebrow-gold">Service details</p>
+                  <h3 className="font-display text-2xl font-bold text-primary">{active.title}</h3>
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-foreground/85">{active.details.intro}</p>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {active.details.points.map((p) => (
+                  <li key={p} className="flex gap-2.5">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                    <span className="leading-relaxed text-foreground/85">{p}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={`${WHATSAPP_URL}?text=${encodeURIComponent(`Hi Eznaa Connect, I'd like more information about: ${active.title}`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-md bg-[#25D366] px-4 py-2.5 text-sm font-semibold text-white hover:opacity-90"
+                >
+                  <MessageCircle className="h-4 w-4" /> Contact us on WhatsApp
+                </a>
+                <button
+                  type="button"
+                  onClick={() => { setOpenIdx(null); openConsultationChat(); }}
+                  className="btn-outline"
+                >
+                  Book free consultation
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
