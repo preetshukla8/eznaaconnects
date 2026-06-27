@@ -70,10 +70,6 @@ src/
 docs/PRD.md                            Full product requirements
 ```
 
-File-based routing: every `.tsx` file in `src/routes/` is a route. `routeTree.gen.ts` is auto-generated — never edit it by hand. Design tokens live in `src/styles.css`; components consume them through semantic utilities (`bg-primary`, `text-gold`, `btn-gold`, `card-soft`) rather than hardcoded colors.
-
----
-
 ## License
 
 © Eznaa Connect Global Business Services UAE. All rights reserved.
