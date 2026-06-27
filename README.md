@@ -1,43 +1,6 @@
-# Eznaa Connect — Global Business Services UAE
+# Eznaa Connect
 
-Marketing and lead-generation website for **Eznaa Connect Global Business Services**, a UAE-based corporate advisory firm offering company formation, visa, tax, and compliance services across the Emirates, with operations in the UAE and India.
-
-> Built with [Lovable](https://lovable.dev) — two-way GitHub sync is enabled, so commits here flow back into the Lovable editor and vice versa.
-
----
-
-## PRD Summary
-
-The site is the v1 marketing surface for Eznaa Connect. Its single job is to **capture qualified leads** for four service lines through a calm, formal, senior-advisor brand voice — explicitly avoiding hype, popups that block content, and self-service complexity.
-
-**Scope (v1):**
-- 8 routes: Home, Services overview, 4 service detail pages (Company Setup, Visa Services, VAT & Corporate Tax, Accounting & Compliance), About, Contact.
-- Multiple reinforcing lead surfaces: hero form, per-service sticky form, dedicated contact page, floating WhatsApp/Call dock, header "Free Consultation" CTA, interleaved CTA bands.
-- Service detail dialogs with WhatsApp deep-link CTA (no public pricing).
-- Account/profile page and grievance portal.
-- Multi-office footer (UAE + India operations with full contact details).
-- Lead capture accepts international phone numbers with country codes.
-
-**Out of scope (v1):** customer portal, payments, internal CRM (leads go to `localStorage` for now), multilingual, blog/CMS.
-
-Full PRD: [`docs/PRD.md`](docs/PRD.md).
-
----
-
-## Product Goals
-
-1. **Convert** — make enquiry the path of least resistance from every page, on every device.
-2. **Communicate authority** — formal palette (deep navy + gold), serif display type, plain-English copy; no marketing fluff.
-3. **Educate prospects** — each service line is explained well enough that visitors self-select the right enquiry.
-4. **Zero friction** — no signup, no login, no paywall, no blocking popups.
-5. **SEO-ready** — per-route metadata, semantic HTML, sitemap + robots, target Lighthouse ≥95 desktop / ≥90 mobile.
-6. **Reachable globally** — UAE + India contact channels, WhatsApp-first, international phone input.
-
-### Service lines covered
-- **Company Setup** — Mainland, Freezone, Offshore.
-- **Visa Services** — Investor, Employee, Family, Golden Visa.
-- **Tax** — VAT registration & filing, Corporate Tax, Customs registration & linking.
-- **Accounting & Compliance** — Bookkeeping, Audit, AML / UBO / ESR.
+A marketing and lead-generation website for **Eznaa Connect Global Business Services UAE** — a corporate advisory firm offering company formation, visa, tax, and compliance services across the Emirates. The site's single job is to capture qualified enquiries through a calm, formal, senior-advisor brand voice.
 
 ---
 
@@ -46,10 +9,30 @@ Full PRD: [`docs/PRD.md`](docs/PRD.md).
 - **Framework:** TanStack Start v1 (React 19 + Vite 7), file-based routing
 - **Styling:** Tailwind CSS v4 (CSS-first `@theme` tokens) + shadcn-style primitives
 - **Icons:** lucide-react
-- **State:** TanStack Query (ready for backend wiring in v1.1)
+- **State / data:** TanStack Query
 - **Runtime:** Bun
 - **Hosting:** Cloudflare Workers (via Lovable)
 - **Fonts:** Libre Baskerville (display) + Inter (body)
+
+---
+
+## How It Works
+
+The site is organised around four reinforcing lead surfaces:
+
+1. **Hero lead form** on the home page — the primary conversion surface.
+2. **Per-service pages** — each service line has its own route with a sticky enquiry form and a "Learn more" dialog containing the detailed scope plus a WhatsApp deep-link CTA (no public pricing).
+3. **Floating contact dock** — persistent WhatsApp + Call buttons on every page.
+4. **Header CTA + dedicated contact page** — "Free Consultation" button and full contact channels.
+
+A lightweight lead profile is stored in `localStorage` so returning visitors keep their details, can view their grievances, and edit their profile from the account menu.
+
+### Service lines
+
+- **Company Setup** — Mainland, Freezone, Offshore
+- **Visa Services** — Investor, Employee, Family, Golden Visa
+- **Tax** — VAT, Corporate Tax, Customs
+- **Accounting & Compliance** — Bookkeeping, Audit, AML / UBO / ESR
 
 ---
 
@@ -69,34 +52,25 @@ bun run build  # production build
 
 ```
 src/
-  routes/              File-based routes (do NOT edit routeTree.gen.ts)
-    __root.tsx         App shell (html/head/body, providers)
-    index.tsx          Home
+  routes/                              File-based routes (do NOT edit routeTree.gen.ts)
+    __root.tsx                         App shell — html/head/body, providers
+    index.tsx                          Home
     about.tsx
     contact.tsx
-    services.tsx
+    services.tsx                       Services overview
     services.company-setup.tsx
     services.visa-services.tsx
     services.tax-vat-ct.tsx
     services.accounting-compliance.tsx
     profile.tsx
-  components/site/     Header, footer, logo, lead modal, services, etc.
-  lib/                 Lead profile store, utilities
-  assets/              Logo and imagery
-  styles.css           Tailwind v4 theme tokens
-docs/PRD.md            Full product requirements
+  components/site/                     Header, footer, logo, lead modal, service blocks, floating dock
+  lib/                                 Lead profile store, utilities
+  assets/                              Logo and imagery
+  styles.css                           Tailwind v4 theme tokens & custom utilities
+docs/PRD.md                            Full product requirements
 ```
 
----
-
-## Contact
-
-- **UAE Operations** — Dubai Business Bay
-  - +971 55 236 5373
-  - +971 558 667 1162
-- **India Operations** — 1439 Omaxe City Phase 2, Ajmer Road, Jaipur
-  - +91 97990 39611
-- **Email** — eznaaconnect@gmail.com
+File-based routing: every `.tsx` file in `src/routes/` is a route. `routeTree.gen.ts` is auto-generated — never edit it by hand. Design tokens live in `src/styles.css`; components consume them through semantic utilities (`bg-primary`, `text-gold`, `btn-gold`, `card-soft`) rather than hardcoded colors.
 
 ---
 
