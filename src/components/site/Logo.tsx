@@ -1,10 +1,10 @@
-import logoAsset from "@/assets/eznaa-logo.png.asset.json";
+import logoAsset from "@/assets/eznaa-logo-transparent.png";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
       <img
-        src={logoAsset.url}
+        src={logoAsset}
         alt="Eznaa Connects"
         className="h-10 w-auto md:h-11"
       />
