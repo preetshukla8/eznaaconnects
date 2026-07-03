@@ -3,6 +3,7 @@ import {
   Outlet,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -99,23 +100,39 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+// Routes that belong to the Business Consultancy division and use its full chrome
+// (header, footer, floating contact, lead capture, consultation chat).
+const CONSULTANCY_PATHS = ["/consultancy", "/services", "/about", "/contact", "/profile"];
+function isConsultancyPath(pathname: string) {
+  return CONSULTANCY_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const showConsultancyChrome = isConsultancyPath(pathname);
 
   return (
     <QueryClientProvider client={queryClient}>
       <LeadProfileProvider>
-        <div className="flex min-h-screen flex-col bg-background">
-          <SiteHeader />
-          <main className="flex-1">
+        {showConsultancyChrome ? (
+          <div className="flex min-h-screen flex-col bg-background">
+            <SiteHeader />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+            <SiteFooter />
+            <FloatingContact />
+            <LeadCaptureModal />
+            <ConsultationChat />
+            <Toaster />
+          </div>
+        ) : (
+          <>
             <Outlet />
-          </main>
-          <SiteFooter />
-          <FloatingContact />
-          <LeadCaptureModal />
-          <ConsultationChat />
-          <Toaster />
-        </div>
+            <Toaster />
+          </>
+        )}
       </LeadProfileProvider>
     </QueryClientProvider>
   );

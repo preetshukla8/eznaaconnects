@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as FashionRouteImport } from './routes/fashion'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsultancyRouteImport } from './routes/consultancy'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesVisaServicesRouteImport } from './routes/services.visa-services'
@@ -35,9 +37,19 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FashionRoute = FashionRouteImport.update({
+  id: '/fashion',
+  path: '/fashion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultancyRoute = ConsultancyRouteImport.update({
+  id: '/consultancy',
+  path: '/consultancy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -75,7 +87,9 @@ const ServicesAccountingComplianceRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultancy': typeof ConsultancyRoute
   '/contact': typeof ContactRoute
+  '/fashion': typeof FashionRoute
   '/profile': typeof ProfileRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -87,7 +101,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultancy': typeof ConsultancyRoute
   '/contact': typeof ContactRoute
+  '/fashion': typeof FashionRoute
   '/profile': typeof ProfileRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -100,7 +116,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultancy': typeof ConsultancyRoute
   '/contact': typeof ContactRoute
+  '/fashion': typeof FashionRoute
   '/profile': typeof ProfileRoute
   '/services': typeof ServicesRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -114,7 +132,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/consultancy'
     | '/contact'
+    | '/fashion'
     | '/profile'
     | '/services'
     | '/sitemap.xml'
@@ -126,7 +146,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/consultancy'
     | '/contact'
+    | '/fashion'
     | '/profile'
     | '/services'
     | '/sitemap.xml'
@@ -138,7 +160,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/consultancy'
     | '/contact'
+    | '/fashion'
     | '/profile'
     | '/services'
     | '/sitemap.xml'
@@ -151,7 +175,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ConsultancyRoute: typeof ConsultancyRoute
   ContactRoute: typeof ContactRoute
+  FashionRoute: typeof FashionRoute
   ProfileRoute: typeof ProfileRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -180,11 +206,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fashion': {
+      id: '/fashion'
+      path: '/fashion'
+      fullPath: '/fashion'
+      preLoaderRoute: typeof FashionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consultancy': {
+      id: '/consultancy'
+      path: '/consultancy'
+      fullPath: '/consultancy'
+      preLoaderRoute: typeof ConsultancyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -253,7 +293,9 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ConsultancyRoute: ConsultancyRoute,
   ContactRoute: ContactRoute,
+  FashionRoute: FashionRoute,
   ProfileRoute: ProfileRoute,
   ServicesRoute: ServicesRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
