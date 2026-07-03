@@ -4,7 +4,7 @@ import { ServicesGrid, TrustStrip, StatsBand, ProcessSteps, CtaBand } from "@/co
 import { openConsultationChat } from "@/components/site/ConsultationChat";
 import heroAdvisor from "@/assets/hero-advisor.jpg";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/consultancy")({
   head: () => ({
     meta: [
       { title: "Eznaa Connects | UAE Business Setup, Visa & Tax Services" },

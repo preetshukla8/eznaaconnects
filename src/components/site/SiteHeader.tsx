@@ -6,10 +6,11 @@ import { openConsultationChat } from "./ConsultationChat";
 import { Logo } from "./Logo";
 
 const NAV = [
-  { to: "/", label: "Home" },
+  { to: "/consultancy", label: "Home" },
   { to: "/services", label: "Services" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
+  { to: "/", label: "← Eznaa Global Mart" },
 ] as const;
 
 const PHONE = "+971552365373";
@@ -36,7 +37,7 @@ export function SiteHeader() {
       <div className="container-page flex h-16 items-center justify-between md:h-20">
         <div className="flex items-center gap-3">
           <AccountMenu />
-          <Link to="/" aria-label="Eznaa Connect — Global Business Services UAE">
+          <Link to="/consultancy" aria-label="Eznaa Connect — Global Business Services UAE">
             <Logo />
           </Link>
         </div>

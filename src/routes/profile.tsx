@@ -29,7 +29,7 @@ function ProfilePage() {
           <p className="mt-2 text-sm text-muted-foreground">Register in seconds to track enquiries and raise grievances.</p>
           <div className="mt-5 flex justify-center gap-2">
             <button onClick={openModal} className="btn-gold">Sign in / Register</button>
-            <Link to="/" className="btn-outline">Go home</Link>
+            <Link to="/consultancy" className="btn-outline">Go home</Link>
           </div>
         </div>
       </section>

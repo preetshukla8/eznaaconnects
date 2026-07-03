@@ -13,8 +13,8 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsultancyRouteImport } from './routes/consultancy'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesVisaServicesRouteImport } from './routes/services.visa-services'
 import { Route as ServicesTaxVatCtRouteImport } from './routes/services.tax-vat-ct'
 import { Route as ServicesCompanySetupRouteImport } from './routes/services.company-setup'
@@ -40,14 +40,14 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsultancyRoute = ConsultancyRouteImport.update({
+  id: '/consultancy',
+  path: '/consultancy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesVisaServicesRoute = ServicesVisaServicesRouteImport.update({
@@ -73,8 +73,8 @@ const ServicesAccountingComplianceRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultancy': typeof ConsultancyRoute
   '/contact': typeof ContactRoute
   '/profile': typeof ProfileRoute
   '/services': typeof ServicesRouteWithChildren
@@ -85,8 +85,8 @@ export interface FileRoutesByFullPath {
   '/services/visa-services': typeof ServicesVisaServicesRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultancy': typeof ConsultancyRoute
   '/contact': typeof ContactRoute
   '/profile': typeof ProfileRoute
   '/services': typeof ServicesRouteWithChildren
@@ -98,8 +98,8 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/consultancy': typeof ConsultancyRoute
   '/contact': typeof ContactRoute
   '/profile': typeof ProfileRoute
   '/services': typeof ServicesRouteWithChildren
@@ -112,8 +112,8 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/about'
+    | '/consultancy'
     | '/contact'
     | '/profile'
     | '/services'
@@ -124,8 +124,8 @@ export interface FileRouteTypes {
     | '/services/visa-services'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/about'
+    | '/consultancy'
     | '/contact'
     | '/profile'
     | '/services'
@@ -136,8 +136,8 @@ export interface FileRouteTypes {
     | '/services/visa-services'
   id:
     | '__root__'
-    | '/'
     | '/about'
+    | '/consultancy'
     | '/contact'
     | '/profile'
     | '/services'
@@ -149,8 +149,8 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ConsultancyRoute: typeof ConsultancyRoute
   ContactRoute: typeof ContactRoute
   ProfileRoute: typeof ProfileRoute
   ServicesRoute: typeof ServicesRouteWithChildren
@@ -187,18 +187,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/consultancy': {
+      id: '/consultancy'
+      path: '/consultancy'
+      fullPath: '/consultancy'
+      preLoaderRoute: typeof ConsultancyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/visa-services': {
@@ -251,8 +251,8 @@ const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ConsultancyRoute: ConsultancyRoute,
   ContactRoute: ContactRoute,
   ProfileRoute: ProfileRoute,
   ServicesRoute: ServicesRouteWithChildren,
@@ -261,13 +261,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
