@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
-import { CheckCircle2, Loader2, UserCircle2 } from "lucide-react";
+import { Loader2, UserCircle2 } from "lucide-react";
 import { useLeadProfile } from "@/lib/lead-profile";
 import { openConsultationChat } from "./ConsultationChat";
+import { PhoneInput } from "./PhoneInput";
+import { SuccessDialog } from "./SuccessDialog";
 
 const SERVICES = [
   "Company Setup — Mainland",
@@ -28,7 +30,7 @@ type Props = {
  * - If not: ask them to sign in (opens lead-capture modal).
  * - Allows international numbers via type=tel + helper text.
  */
-export function ConsultationRequest({ defaultService, title = "Request a consultation", subtitle = "A senior advisor will reach out within 1 business hour." }: Props) {
+export function ConsultationRequest({ defaultService, title = "Request a consultation", subtitle = "Typical Response: Within 24 Business Hours." }: Props) {
   const { profile, openModal } = useLeadProfile();
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
@@ -72,18 +74,11 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
     );
   }
 
-  if (done) {
-    return (
-      <div className="card-soft p-7 text-center">
-        <CheckCircle2 className="mx-auto h-10 w-10 text-gold" />
-        <h3 className="mt-3 font-display text-xl font-bold text-primary">Request received</h3>
-        <p className="mt-1 text-sm text-muted-foreground">An advisor will contact {profile.name.split(" ")[0]} shortly on {profile.phone}.</p>
-      </div>
-    );
-  }
+  // Success confirmation is rendered as a modal popup — see <SuccessDialog /> below.
 
   return (
-    <form onSubmit={onSubmit} className="card-soft p-6 md:p-7">
+    <>
+    <form onSubmit={onSubmit} className="card-soft p-6 md:p-7 animate-fade-in">
       <p className="eyebrow-gold">Logged in · {profile.name}</p>
       <h3 className="mt-1 font-display text-2xl font-bold text-primary">{title}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
@@ -96,13 +91,7 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
       <div className="mt-4 grid gap-3">
         <label className="flex flex-col gap-1.5">
           <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Alternate contact number (optional)</span>
-          <input
-            name="altPhone"
-            type="tel"
-            placeholder="Include country code, e.g. +44 7700 900000"
-            className="h-11 rounded-md border border-input bg-card px-3.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
-          />
-          <span className="text-[11px] text-muted-foreground">We accept numbers from any country — please include the country code.</span>
+          <PhoneInput name="altPhone" placeholder="55 236 5373" />
         </label>
 
         <label className="flex flex-col gap-1.5">
