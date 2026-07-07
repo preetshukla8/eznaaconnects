@@ -97,6 +97,9 @@ export function SiteHeader() {
               Call {PHONE}
             </a>
             <button type="button" onClick={openConsultationChat} className="btn-gold mt-2">Free Consultation</button>
+            <Link to="/" className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              <ArrowLeft className="h-3.5 w-3.5" /> Eznaa Global Mart
+            </Link>
           </div>
         </div>
       )}
