@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ArrowLeft } from "lucide-react";
 import { AccountMenu } from "./AccountMenu";
 import { openConsultationChat } from "./ConsultationChat";
 import { Logo } from "./Logo";
@@ -10,7 +10,6 @@ const NAV = [
   { to: "/services", label: "Services" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
-  { to: "/", label: "← Eznaa Global Mart" },
 ] as const;
 
 const PHONE = "+971552365373";
@@ -49,7 +48,7 @@ export function SiteHeader() {
               to={item.to}
               className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
               activeProps={{ className: "rounded-md px-3 py-2 text-sm font-semibold text-primary bg-secondary" }}
-              activeOptions={{ exact: item.to === "/" }}
+              activeOptions={{ exact: false }}
             >
               {item.label}
             </Link>
@@ -57,10 +56,18 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+          <Link
+            to="/"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gradient-to-r from-gold/10 to-gold/5 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary shadow-sm transition-all hover:border-gold hover:from-gold/20 hover:to-gold/10 hover:shadow-md"
+            title="Back to Eznaa Global Mart"
+          >
+            <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-0.5" />
+            Eznaa Global Mart
+          </Link>
+          <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-gold">
             <Phone className="h-4 w-4" /> {PHONE}
           </a>
-          <button type="button" onClick={openConsultationChat} className="btn-gold">Free Consultation</button>
+          <button type="button" onClick={openConsultationChat} className="btn-gold transition-transform hover:scale-[1.02]">Free Consultation</button>
         </div>
 
         <button
@@ -81,7 +88,7 @@ export function SiteHeader() {
                 to={item.to}
                 className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground/80 hover:bg-secondary"
                 activeProps={{ className: "rounded-md px-3 py-2.5 text-sm font-semibold text-primary bg-secondary" }}
-                activeOptions={{ exact: item.to === "/" }}
+                activeOptions={{ exact: false }}
               >
                 {item.label}
               </Link>
@@ -90,6 +97,9 @@ export function SiteHeader() {
               Call {PHONE}
             </a>
             <button type="button" onClick={openConsultationChat} className="btn-gold mt-2">Free Consultation</button>
+            <Link to="/" className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              <ArrowLeft className="h-3.5 w-3.5" /> Eznaa Global Mart
+            </Link>
           </div>
         </div>
       )}

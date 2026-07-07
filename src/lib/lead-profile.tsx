@@ -19,7 +19,20 @@ export type Grievance = {
   status: "Open" | "In Review" | "Resolved";
   createdAt: string;
   updates: { ts: string; note: string }[];
+  assignedExecutive?: {
+    name: string;
+    phone: string;
+    email: string;
+  };
+  eta?: string;
+  latestRemark?: string;
 };
+
+const EXECUTIVE_POOL = [
+  { name: "Priya Sharma", phone: "+971 55 236 5373", email: "priya@eznaaconnects.ae" },
+  { name: "Ahmed Al Marri", phone: "+971 55 236 5373", email: "ahmed@eznaaconnects.ae" },
+  { name: "Rahul Verma", phone: "+971 55 236 5373", email: "rahul@eznaaconnects.ae" },
+];
 
 const STORAGE_KEY = "eznaa_profile";
 const DISMISS_KEY = "eznaa_modal_dismissed";
@@ -101,12 +114,17 @@ export function LeadProfileProvider({ children }: { children: ReactNode }) {
 
   const addGrievance = useCallback<Ctx["addGrievance"]>((g) => {
     const now = new Date().toISOString();
+    const exec = EXECUTIVE_POOL[Math.floor(Math.random() * EXECUTIVE_POOL.length)];
+    const firstRemark = "Grievance received. Assigned to a senior executive for review.";
     const newG: Grievance = {
       ...g,
       id: genId(),
       status: "Open",
       createdAt: now,
-      updates: [{ ts: now, note: "Grievance received. Our team will respond within 24 hours." }],
+      updates: [{ ts: now, note: firstRemark }],
+      assignedExecutive: exec,
+      eta: "Within 24 business hours",
+      latestRemark: firstRemark,
     };
     setGrievances((prev) => {
       const next = [newG, ...prev];
