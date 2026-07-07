@@ -2,6 +2,8 @@ import { useEffect, useState, type FormEvent } from "react";
 import { X, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { useLeadProfile } from "@/lib/lead-profile";
+import { PhoneInput } from "./PhoneInput";
+import { SuccessDialog } from "./SuccessDialog";
 
 const SERVICES = [
   "Company Setup — Mainland",
@@ -18,6 +20,7 @@ const SERVICES = [
 export function LeadCaptureModal() {
   const { modalOpen, closeModal, saveProfile, profile } = useLeadProfile();
   const [submitting, setSubmitting] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
   const editing = !!profile;
 
   useEffect(() => {
