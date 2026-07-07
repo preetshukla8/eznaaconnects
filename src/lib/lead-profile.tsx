@@ -19,7 +19,20 @@ export type Grievance = {
   status: "Open" | "In Review" | "Resolved";
   createdAt: string;
   updates: { ts: string; note: string }[];
+  assignedExecutive?: {
+    name: string;
+    phone: string;
+    email: string;
+  };
+  eta?: string;
+  latestRemark?: string;
 };
+
+const EXECUTIVE_POOL = [
+  { name: "Priya Sharma", phone: "+971 55 236 5373", email: "priya@eznaaconnects.ae" },
+  { name: "Ahmed Al Marri", phone: "+971 55 236 5373", email: "ahmed@eznaaconnects.ae" },
+  { name: "Rahul Verma", phone: "+971 55 236 5373", email: "rahul@eznaaconnects.ae" },
+];
 
 const STORAGE_KEY = "eznaa_profile";
 const DISMISS_KEY = "eznaa_modal_dismissed";
