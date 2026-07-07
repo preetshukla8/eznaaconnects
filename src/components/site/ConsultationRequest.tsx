@@ -117,9 +117,18 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
         </label>
       </div>
 
-      <button type="submit" disabled={submitting} className="btn-gold mt-5 w-full">
+      <button type="submit" disabled={submitting} className="btn-gold mt-5 w-full transition-transform hover:scale-[1.01]">
         {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</> : "Request callback"}
       </button>
     </form>
+
+    <SuccessDialog
+      open={done}
+      onClose={() => setDone(false)}
+      title="Request received successfully"
+      description={`Thank you, ${profile.name.split(" ")[0]}. A senior advisor will contact you on ${profile.phone}. Typical Response: Within 24 Business Hours.`}
+      primaryLabel="Close"
+    />
+    </>
   );
 }
