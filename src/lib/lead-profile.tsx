@@ -114,12 +114,17 @@ export function LeadProfileProvider({ children }: { children: ReactNode }) {
 
   const addGrievance = useCallback<Ctx["addGrievance"]>((g) => {
     const now = new Date().toISOString();
+    const exec = EXECUTIVE_POOL[Math.floor(Math.random() * EXECUTIVE_POOL.length)];
+    const firstRemark = "Grievance received. Assigned to a senior executive for review.";
     const newG: Grievance = {
       ...g,
       id: genId(),
       status: "Open",
       createdAt: now,
-      updates: [{ ts: now, note: "Grievance received. Our team will respond within 24 hours." }],
+      updates: [{ ts: now, note: firstRemark }],
+      assignedExecutive: exec,
+      eta: "Within 24 business hours",
+      latestRemark: firstRemark,
     };
     setGrievances((prev) => {
       const next = [newG, ...prev];
