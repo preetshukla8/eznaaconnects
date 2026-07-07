@@ -194,7 +194,7 @@ export function StatsBand() {
     { k: "5,000+", v: "Businesses launched" },
     { k: "50+", v: "UAE Freezones covered" },
     { k: "98%", v: "Client retention" },
-    { k: "1 hr", v: "Avg. response time" },
+    { k: "24 hrs", v: "Typical response time" },
   ];
   return (
     <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-4">
@@ -275,7 +275,7 @@ export function ServicePageTemplate({
             </div>
           </div>
           <div id="enquire" className="lg:sticky lg:top-24">
-            <ConsultationRequest defaultService={defaultService} title="Free quote in 1 hour" subtitle="Senior consultant — not a call center." />
+            <ConsultationRequest defaultService={defaultService} title="Free quote within 24 business hours" subtitle="Senior consultant — not a call center." />
           </div>
         </div>
       </section>

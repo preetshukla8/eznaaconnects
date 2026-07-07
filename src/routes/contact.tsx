@@ -38,7 +38,7 @@ function ContactPage() {
           <div className="space-y-4">
             <ContactRow icon={Phone} title="Call us" desc="Sun–Thu, 9:00 – 18:00 GST" href={`tel:${PHONE}`} linkText={PHONE} />
             <ContactRow icon={MessageCircle} title="WhatsApp" desc="Fastest response, all days" href={`https://wa.me/${WA}`} linkText={PHONE} />
-            <ContactRow icon={Mail} title="Email" desc="We reply within 1 business hour" href={`mailto:${EMAIL}`} linkText={EMAIL} />
+            <ContactRow icon={Mail} title="Email" desc="Typical Response: Within 24 Business Hours" href={`mailto:${EMAIL}`} linkText={EMAIL} />
           </div>
 
           <div>
