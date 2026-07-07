@@ -48,7 +48,7 @@ export function SiteHeader() {
               to={item.to}
               className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-secondary hover:text-primary"
               activeProps={{ className: "rounded-md px-3 py-2 text-sm font-semibold text-primary bg-secondary" }}
-              activeOptions={{ exact: item.to === "/" }}
+              activeOptions={{ exact: false }}
             >
               {item.label}
             </Link>
@@ -88,7 +88,7 @@ export function SiteHeader() {
                 to={item.to}
                 className="rounded-md px-3 py-2.5 text-sm font-medium text-foreground/80 hover:bg-secondary"
                 activeProps={{ className: "rounded-md px-3 py-2.5 text-sm font-semibold text-primary bg-secondary" }}
-                activeOptions={{ exact: item.to === "/" }}
+                activeOptions={{ exact: false }}
               >
                 {item.label}
               </Link>
