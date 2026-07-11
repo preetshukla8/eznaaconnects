@@ -123,13 +123,14 @@ export function LeadCaptureModal() {
               </p>
             </div>
 
-            <form onSubmit={onSubmit} className="px-6 py-5 sm:px-8 sm:py-6">
+            <form onSubmit={onSubmit} noValidate className="px-6 py-5 sm:px-8 sm:py-6">
               <div className="grid gap-3">
-                <Field name="name" label="Full name" required defaultValue={profile?.name} placeholder="John Smith" />
-                <Field name="email" type="email" label="Email" required defaultValue={profile?.email} placeholder="you@company.com" />
+                <Field name="name" label="Full name" required defaultValue={profile?.name} placeholder="John Smith" error={errors.name} />
+                <Field name="email" type="email" label="Email" required defaultValue={profile?.email} placeholder="you@company.com" error={errors.email} />
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Phone / WhatsApp</span>
                   <PhoneInput name="phone" required defaultValue={profile?.phone} placeholder="55 236 5373" />
+                  {errors.phone && <span className="text-xs font-medium text-destructive">{errors.phone}</span>}
                 </label>
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Service interested in</span>
@@ -168,11 +169,20 @@ export function LeadCaptureModal() {
   );
 }
 
-function Field({ label, name, type = "text", required, placeholder, defaultValue }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string; defaultValue?: string }) {
+function Field({ label, name, type = "text", required, placeholder, defaultValue, error }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string; defaultValue?: string; error?: string }) {
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">{label}</span>
-      <input name={name} type={type} required={required} defaultValue={defaultValue} placeholder={placeholder} className="h-11 rounded-md border border-input bg-card px-3.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30" />
+      <input
+        name={name}
+        type={type}
+        required={required}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        aria-invalid={!!error}
+        className={`h-11 rounded-md border bg-card px-3.5 text-sm outline-none focus:ring-2 focus:ring-ring/30 ${error ? "border-destructive focus:border-destructive" : "border-input focus:border-primary"}`}
+      />
+      {error && <span className="text-xs font-medium text-destructive">{error}</span>}
     </label>
   );
 }
