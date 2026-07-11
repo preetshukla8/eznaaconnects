@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Loader2, UserCircle2 } from "lucide-react";
 import { useLeadProfile } from "@/lib/lead-profile";
 import { submitConsultation } from "@/lib/api";
+import { validatePhone } from "@/lib/validation";
 import { PhoneInput } from "./PhoneInput";
 import { SuccessDialog } from "./SuccessDialog";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -36,6 +37,7 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [altPhoneError, setAltPhoneError] = useState<string | null>(null);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,6 +47,17 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
     const altPhone = String(fd.get("altPhone") || "").trim();
     const service = String(fd.get("service") || "").trim();
     const notes = String(fd.get("notes") || "").trim();
+
+    // Optional field — but if provided must be valid.
+    if (altPhone) {
+      const err = validatePhone(altPhone);
+      if (err) {
+        setAltPhoneError(err);
+        toast.error("Please fix the highlighted fields.");
+        return;
+      }
+    }
+    setAltPhoneError(null);
 
     setSubmitting(true);
     setError(null);
@@ -114,6 +127,7 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
         <label className="flex flex-col gap-1.5">
           <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Alternate contact number (optional)</span>
           <PhoneInput name="altPhone" placeholder="55 236 5373" />
+          {altPhoneError && <span className="text-xs font-medium text-destructive">{altPhoneError}</span>}
         </label>
 
         <label className="flex flex-col gap-1.5">

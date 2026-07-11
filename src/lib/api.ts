@@ -115,6 +115,14 @@ export async function submitConsultation(payload: {
     countryCode,
     service: payload.service,
     message: payload.notes,
+    // Ask the backend to dispatch a branded welcome/acknowledgement email.
+    sendWelcomeEmail: true,
+    welcomeEmail: {
+      subject: "Welcome to Eznaa Connect — we've received your request",
+      brand: "Eznaa Connect Business Consultancy Services",
+      preheader: "Thanks for reaching out. A senior advisor will be in touch shortly.",
+      body: `Hello ${payload.name},\n\nThank you for reaching out to Eznaa Connect Business Consultancy Services — a unit of Eznaa Global Mart FZ-LLC. We have successfully received your consultation request${payload.service ? ` regarding ${payload.service}` : ""}.\n\nA senior advisor will contact you within our standard response window (24 business hours).\n\nWarm regards,\nTeam Eznaa Connect`,
+    },
   });
 }
 

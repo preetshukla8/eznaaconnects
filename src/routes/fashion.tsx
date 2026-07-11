@@ -5,17 +5,16 @@ import { motion } from "motion/react";
 export const Route = createFileRoute("/fashion")({
   head: () => ({
     meta: [
-      { title: "Fashion & Apparel — Coming Soon | Eznaa Global Mart FZ-LLC" },
+      { title: "Fashion & Apparel | Eznaa Global Mart FZ-LLC" },
       {
         name: "description",
         content:
-          "The Fashion & Apparel division of Eznaa Global Mart FZ-LLC is currently in development.",
+          "Eznaa Global Mart's Fashion & Apparel collection is available on Noon, Amazon UAE and other leading UAE marketplaces. A dedicated site experience is launching soon.",
       },
-      { name: "robots", content: "noindex" },
-      { property: "og:title", content: "Fashion & Apparel — Coming Soon" },
+      { property: "og:title", content: "Fashion & Apparel — Eznaa Global Mart FZ-LLC" },
       {
         property: "og:description",
-        content: "A new premium lifestyle label from the Eznaa group is on the way.",
+        content: "Now available on Noon, Amazon UAE and leading UAE marketplaces.",
       },
     ],
   }),
@@ -84,7 +83,7 @@ function FashionComingSoon() {
               className="inline-flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.24em]"
               style={{ color: GOLD }}
             >
-              <Sparkles className="h-3.5 w-3.5" /> Division 02 · In Development
+              <Sparkles className="h-3.5 w-3.5" /> Fashion & Apparel Division
             </span>
 
             <h1
@@ -94,10 +93,10 @@ function FashionComingSoon() {
               Fashion & Apparel
             </h1>
             <p
-              className="mt-3 font-display text-lg italic md:text-xl"
+              className="mt-3 font-display text-base md:text-lg"
               style={{ color: INK_SOFT }}
             >
-              — coming soon —
+              Already available across leading UAE marketplaces.
             </p>
 
             <div className="mx-auto mt-8 flex items-center justify-center gap-3">
@@ -120,11 +119,10 @@ function FashionComingSoon() {
             </div>
 
             <p
-              className="mx-auto mt-8 max-w-lg text-sm leading-relaxed md:text-base"
+              className="mx-auto mt-8 max-w-xl text-sm leading-relaxed md:text-base"
               style={{ color: INK_SOFT }}
             >
-              A new premium lifestyle label from the Eznaa group is quietly in the making
-              — considered design, refined materials and contemporary silhouettes.
+              Our Fashion & Apparel collection is currently retailing on <strong style={{ color: INK }}>Noon</strong>, <strong style={{ color: INK }}>Amazon UAE</strong> and other major e-commerce platforms across the United Arab Emirates. A dedicated Fashion & Apparel experience on this website is being crafted and will launch here soon.
             </p>
 
             <Link

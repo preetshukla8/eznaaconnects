@@ -3,6 +3,7 @@ import { X, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { useLeadProfile } from "@/lib/lead-profile";
 import { submitConsultation } from "@/lib/api";
+import { checkDuplicate, requireField, validateEmail, validatePhone } from "@/lib/validation";
 import { PhoneInput } from "./PhoneInput";
 import { SuccessDialog } from "./SuccessDialog";
 
@@ -22,6 +23,7 @@ export function LeadCaptureModal() {
   const { modalOpen, closeModal, saveProfile, profile } = useLeadProfile();
   const [submitting, setSubmitting] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const editing = !!profile;
 
   useEffect(() => {
@@ -41,6 +43,30 @@ export function LeadCaptureModal() {
     const service = String(fd.get("service") || "").trim();
     const message = String(fd.get("message") || "").trim();
 
+    // Client-side validation
+    const nextErrors: Record<string, string> = {};
+    const nameErr = requireField(name, "Full name");
+    if (nameErr) nextErrors.name = nameErr;
+    const emailErr = validateEmail(email);
+    if (emailErr) nextErrors.email = emailErr;
+    const phoneErr = validatePhone(phone);
+    if (phoneErr) nextErrors.phone = phoneErr;
+
+    // Duplicate detection — only for brand-new registrations, and ignore self when editing
+    if (!nextErrors.email && !nextErrors.phone) {
+      const dup = checkDuplicate(email, phone, editing ? { email: profile?.email, phone: profile?.phone } : undefined);
+      if (dup) {
+        if (/email/i.test(dup)) nextErrors.email = dup;
+        else nextErrors.phone = dup;
+      }
+    }
+
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      toast.error("Please fix the highlighted fields.");
+      return;
+    }
+    setErrors({});
     setSubmitting(true);
 
     try {
@@ -68,8 +94,8 @@ export function LeadCaptureModal() {
         setSuccessOpen(true);
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "We could not send your consultation request. Please try again.";
-      toast.error(message);
+      const errMsg = err instanceof Error ? err.message : "We could not send your consultation request. Please try again.";
+      toast.error(errMsg);
     } finally {
       setSubmitting(false);
     }
@@ -97,13 +123,14 @@ export function LeadCaptureModal() {
               </p>
             </div>
 
-            <form onSubmit={onSubmit} className="px-6 py-5 sm:px-8 sm:py-6">
+            <form onSubmit={onSubmit} noValidate className="px-6 py-5 sm:px-8 sm:py-6">
               <div className="grid gap-3">
-                <Field name="name" label="Full name" required defaultValue={profile?.name} placeholder="John Smith" />
-                <Field name="email" type="email" label="Email" required defaultValue={profile?.email} placeholder="you@company.com" />
+                <Field name="name" label="Full name" required defaultValue={profile?.name} placeholder="John Smith" error={errors.name} />
+                <Field name="email" type="email" label="Email" required defaultValue={profile?.email} placeholder="you@company.com" error={errors.email} />
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Phone / WhatsApp</span>
                   <PhoneInput name="phone" required defaultValue={profile?.phone} placeholder="55 236 5373" />
+                  {errors.phone && <span className="text-xs font-medium text-destructive">{errors.phone}</span>}
                 </label>
                 <label className="flex flex-col gap-1.5">
                   <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">Service interested in</span>
@@ -142,11 +169,20 @@ export function LeadCaptureModal() {
   );
 }
 
-function Field({ label, name, type = "text", required, placeholder, defaultValue }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string; defaultValue?: string }) {
+function Field({ label, name, type = "text", required, placeholder, defaultValue, error }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string; defaultValue?: string; error?: string }) {
   return (
     <label className="flex flex-col gap-1.5">
       <span className="text-xs font-semibold uppercase tracking-wider text-foreground/70">{label}</span>
-      <input name={name} type={type} required={required} defaultValue={defaultValue} placeholder={placeholder} className="h-11 rounded-md border border-input bg-card px-3.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30" />
+      <input
+        name={name}
+        type={type}
+        required={required}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        aria-invalid={!!error}
+        className={`h-11 rounded-md border bg-card px-3.5 text-sm outline-none focus:ring-2 focus:ring-ring/30 ${error ? "border-destructive focus:border-destructive" : "border-input focus:border-primary"}`}
+      />
+      {error && <span className="text-xs font-medium text-destructive">{error}</span>}
     </label>
   );
 }
