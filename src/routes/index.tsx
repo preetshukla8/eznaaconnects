@@ -65,7 +65,7 @@ function ParentGateway() {
                 className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] md:text-[0.66rem]"
                 style={{ color: INK_SOFT }}
               >
-                Parent Company · United Arab Emirates
+                United Arab Emirates
               </span>
             </div>
           </div>
@@ -104,18 +104,29 @@ function ParentGateway() {
               Welcome to Eznaa Global Mart FZ-LLC
             </h1>
             <p
-              className="mx-auto mt-3 max-w-lg text-sm leading-relaxed md:text-base"
+              className="mx-auto mt-4 max-w-xl text-sm leading-relaxed md:text-base"
               style={{ color: INK_SOFT }}
             >
-              Select the business division you would like to explore.
+              A diversified enterprise with an established presence across the Middle East and India — delivering trusted business, advisory and lifestyle solutions.
             </p>
+            <div
+              className="mx-auto mt-4 flex items-center justify-center gap-3 text-lg md:text-xl"
+              aria-label="Countries of operation: UAE, India, Oman, Saudi Arabia"
+            >
+              <span>🇦🇪</span>
+              <span style={{ color: GOLD }}>·</span>
+              <span>🇮🇳</span>
+              <span style={{ color: GOLD }}>·</span>
+              <span>🇴🇲</span>
+              <span style={{ color: GOLD }}>·</span>
+              <span>🇸🇦</span>
+            </div>
           </motion.div>
 
           <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8">
             <DivisionCard
               to="/consultancy"
               index={0}
-              eyebrow="Division 01"
               title="Business Consultancy Services"
               description="Business setup, corporate advisory, compliance and strategic consulting."
               cta="Explore"
@@ -126,10 +137,9 @@ function ParentGateway() {
             <DivisionCard
               to="/fashion"
               index={1}
-              eyebrow="Division 02"
               title="Fashion & Apparel"
               description="Premium fashion and lifestyle division."
-              cta="Coming Soon"
+              cta="Explore"
               icon={<Sparkles className="h-5 w-5" />}
               accent={GOLD}
               buttonStyle={{
@@ -158,7 +168,6 @@ function ParentGateway() {
 function DivisionCard({
   to,
   index,
-  eyebrow,
   title,
   description,
   cta,
@@ -168,7 +177,6 @@ function DivisionCard({
 }: {
   to: "/consultancy" | "/fashion";
   index: number;
-  eyebrow: string;
   title: string;
   description: string;
   cta: string;
@@ -204,13 +212,7 @@ function DivisionCard({
           style={{ background: accent }}
         />
 
-        <div className="flex items-center justify-between">
-          <span
-            className="text-[0.65rem] font-semibold uppercase tracking-[0.24em]"
-            style={{ color: INK_SOFT }}
-          >
-            {eyebrow}
-          </span>
+        <div className="flex items-center justify-end">
           <div
             className="grid h-10 w-10 place-items-center rounded-lg"
             style={{
