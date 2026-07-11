@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { X, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { useLeadProfile } from "@/lib/lead-profile";
+import { submitConsultation } from "@/lib/api";
 import { PhoneInput } from "./PhoneInput";
 import { SuccessDialog } from "./SuccessDialog";
 
@@ -34,21 +35,43 @@ export function LeadCaptureModal() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    const name = String(fd.get("name") || "").trim();
+    const email = String(fd.get("email") || "").trim();
+    const phone = String(fd.get("phone") || "").trim();
+    const service = String(fd.get("service") || "").trim();
+    const message = String(fd.get("message") || "").trim();
+
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 400));
-    const wasEditing = editing;
-    saveProfile({
-      name: String(fd.get("name") || ""),
-      email: String(fd.get("email") || ""),
-      phone: String(fd.get("phone") || ""),
-      service: String(fd.get("service") || ""),
-      message: String(fd.get("message") || ""),
-    });
-    setSubmitting(false);
-    if (wasEditing) {
-      toast.success("Profile updated");
-    } else {
-      setSuccessOpen(true);
+
+    try {
+      if (!editing) {
+        await submitConsultation({
+          name,
+          email,
+          phone,
+          service: service || undefined,
+          notes: message || undefined,
+        });
+      }
+
+      saveProfile({
+        name,
+        email,
+        phone,
+        service: service || undefined,
+        message: message || undefined,
+      });
+
+      if (editing) {
+        toast.success("Profile updated");
+      } else {
+        setSuccessOpen(true);
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "We could not send your consultation request. Please try again.";
+      toast.error(message);
+    } finally {
+      setSubmitting(false);
     }
   }
 

@@ -2,8 +2,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone, ArrowLeft } from "lucide-react";
 import { AccountMenu } from "./AccountMenu";
-import { openConsultationChat } from "./ConsultationChat";
 import { Logo } from "./Logo";
+import { useLeadProfile } from "@/lib/lead-profile";
 
 const NAV = [
   { to: "/consultancy", label: "Home" },
@@ -18,6 +18,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { openModal } = useLeadProfile();
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -67,7 +68,7 @@ export function SiteHeader() {
           <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-gold">
             <Phone className="h-4 w-4" /> {PHONE}
           </a>
-          <button type="button" onClick={openConsultationChat} className="btn-gold transition-transform hover:scale-[1.02]">Free Consultation</button>
+          <button type="button" onClick={openModal} className="btn-gold transition-transform hover:scale-[1.02]">Free Consultation</button>
         </div>
 
         <button
@@ -96,7 +97,7 @@ export function SiteHeader() {
             <a href={`tel:${PHONE}`} className="rounded-md px-3 py-2.5 text-sm font-semibold text-primary">
               Call {PHONE}
             </a>
-            <button type="button" onClick={openConsultationChat} className="btn-gold mt-2">Free Consultation</button>
+            <button type="button" onClick={openModal} className="btn-gold mt-2">Free Consultation</button>
             <Link to="/" className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-primary">
               <ArrowLeft className="h-3.5 w-3.5" /> Eznaa Global Mart
             </Link>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Briefcase, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
+import ParentLogo from "@/assets/parent-company-logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,11 +47,12 @@ function ParentGateway() {
       >
         <div className="container-page flex h-16 items-center justify-between md:h-20">
           <div className="flex items-center gap-3">
-            <div
-              className="grid h-10 w-10 place-items-center rounded-md font-display text-lg font-bold"
-              style={{ background: INK, color: "#F7F6F2" }}
-            >
-              E
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-md bg-white/80 shadow-sm">
+              <img
+                src={ParentLogo}
+                alt="Eznaa Global Mart FZ-LLC logo"
+                className="h-full w-full object-contain"
+              />
             </div>
             <div className="flex flex-col leading-tight">
               <span

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Quote, ShieldCheck, Star } from "lucide-react";
-import { ServicesGrid, TrustStrip, StatsBand, ProcessSteps, CtaBand } from "@/components/site/SiteSections";
-import { openConsultationChat } from "@/components/site/ConsultationChat";
+import { ServicesGrid, TrustStrip, StatsBand, ProcessSteps, CtaBand, ReviewsSection } from "@/components/site/SiteSections";
+import { useLeadProfile } from "@/lib/lead-profile";
 import heroAdvisor from "@/assets/hero-advisor.jpg";
 
 export const Route = createFileRoute("/consultancy")({
@@ -17,6 +17,8 @@ export const Route = createFileRoute("/consultancy")({
 });
 
 function HomePage() {
+  const { openModal } = useLeadProfile();
+
   return (
     <>
       {/* HERO */}
@@ -35,7 +37,7 @@ function HomePage() {
               Eznaa Connects handles your company formation, visas, VAT &amp; Corporate Tax, accounting and compliance — across Mainland, all 50+ Freezones and Offshore — so you can focus on the business.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <button type="button" onClick={openConsultationChat} className="btn-gold">Get free consultation <ArrowRight className="h-4 w-4" /></button>
+              <button type="button" onClick={openModal} className="btn-gold">Get free consultation <ArrowRight className="h-4 w-4" /></button>
               <Link to="/services" className="btn-outline">Explore services</Link>
             </div>
             <div className="mt-8 flex items-center gap-4">
@@ -153,6 +155,7 @@ function HomePage() {
         </div>
       </section>
 
+      <ReviewsSection />
       <CtaBand />
     </>
   );

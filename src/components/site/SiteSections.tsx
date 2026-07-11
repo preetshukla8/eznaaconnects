@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { ArrowRight, Building2, FileCheck2, Landmark, ShieldCheck, Sparkles, BadgeCheck, Users, Clock, Globe2, FileText, Link2, MessageCircle, X } from "lucide-react";
+import { ArrowRight, Building2, FileCheck2, Landmark, ShieldCheck, Sparkles, BadgeCheck, Users, Clock, Globe2, FileText, Link2, MessageCircle, Star, X } from "lucide-react";
 import { ConsultationRequest } from "@/components/site/ConsultationRequest";
-import { openConsultationChat } from "@/components/site/ConsultationChat";
+import { useLeadProfile } from "@/lib/lead-profile";
 
 const WHATSAPP_URL = "https://wa.me/971552365373";
 
@@ -75,6 +75,7 @@ export const SERVICES = [
 
 export function ServicesGrid() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const { openModal } = useLeadProfile();
   const active = openIdx !== null ? SERVICES[openIdx] : null;
 
   return (
@@ -156,7 +157,7 @@ export function ServicesGrid() {
                 </a>
                 <button
                   type="button"
-                  onClick={() => { setOpenIdx(null); openConsultationChat(); }}
+                  onClick={() => { setOpenIdx(null); openModal(); }}
                   className="btn-outline"
                 >
                   Book free consultation
@@ -228,7 +229,58 @@ export function ProcessSteps() {
   );
 }
 
+export function ReviewsSection() {
+  const reviews = [
+    {
+      name: "Rohan Mehta",
+      role: "Founder · SaaS, Dubai",
+      quote: "The process felt calm and structured from day one. We had clear milestones, transparent advice and a final answer on every question.",
+    },
+    {
+      name: "Amina Al Zaabi",
+      role: "Director · Trading Group, Abu Dhabi",
+      quote: "Their team handled the setup, visas and tax alignment without confusion. The quality of guidance was exceptional for a premium service.",
+    },
+    {
+      name: "Daniel Brooks",
+      role: "Managing Partner · Consulting Firm, London",
+      quote: "We needed a reliable UAE setup partner with international experience. Eznaa delivered with speed, precision and thoughtful follow-through.",
+    },
+  ];
+
+  return (
+    <section className="section">
+      <div className="container-page">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow-gold">Client feedback</p>
+          <h3 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">Trusted by founders and growing companies</h3>
+          <p className="mt-3 text-sm text-muted-foreground md:text-base">A premium advisory experience built around responsiveness, clarity and dependable execution.</p>
+        </div>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {reviews.map((review) => (
+            <article key={review.name} className="card-soft p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lift">
+              <div className="flex items-center gap-1 text-gold">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={`${review.name}-${i}`} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <p className="mt-4 text-sm leading-7 text-foreground/85">“{review.quote}”</p>
+              <div className="mt-6 border-t border-border pt-4">
+                <div className="font-semibold text-primary">{review.name}</div>
+                <div className="text-sm text-muted-foreground">{review.role}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function CtaBand({ title = "Ready to start your UAE business?", note = "Talk to a senior advisor today — free, no obligation." }: { title?: string; note?: string }) {
+  const { openModal } = useLeadProfile();
+
   return (
     <section className="section">
       <div className="container-page">
@@ -239,7 +291,7 @@ export function CtaBand({ title = "Ready to start your UAE business?", note = "T
             <p className="mt-1 text-sm text-muted-foreground">{note}</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <button type="button" onClick={openConsultationChat} className="btn-primary">Book free consultation</button>
+            <button type="button" onClick={openModal} className="btn-primary">Book free consultation</button>
             <a href="https://wa.me/971552365373" target="_blank" rel="noreferrer" className="btn-outline">WhatsApp us</a>
           </div>
         </div>
@@ -261,6 +313,8 @@ export function ServicePageTemplate({
   sections: { heading: string; body: string; bullets?: string[] }[];
   defaultService: string;
 }) {
+  const { openModal } = useLeadProfile();
+
   return (
     <>
       <section className="section-band">
@@ -270,7 +324,7 @@ export function ServicePageTemplate({
             <h1 className="mt-3 font-display text-3xl font-bold leading-tight md:text-5xl">{title}</h1>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">{intro}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button type="button" onClick={openConsultationChat} className="btn-primary">Get a quote</button>
+              <button type="button" onClick={openModal} className="btn-primary">Get a quote</button>
               <a href="tel:+971552365373" className="btn-outline">Call an advisor</a>
             </div>
           </div>

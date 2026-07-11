@@ -2,9 +2,10 @@ import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Loader2, UserCircle2 } from "lucide-react";
 import { useLeadProfile } from "@/lib/lead-profile";
-import { openConsultationChat } from "./ConsultationChat";
+import { submitConsultation } from "@/lib/api";
 import { PhoneInput } from "./PhoneInput";
 import { SuccessDialog } from "./SuccessDialog";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const SERVICES = [
   "Company Setup — Mainland",
@@ -34,27 +35,48 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
   const { profile, openModal } = useLeadProfile();
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!profile) return;
+
     const fd = new FormData(e.currentTarget);
+    const altPhone = String(fd.get("altPhone") || "").trim();
+    const service = String(fd.get("service") || "").trim();
+    const notes = String(fd.get("notes") || "").trim();
+
     setSubmitting(true);
+    setError(null);
+
     try {
       const queue = JSON.parse(localStorage.getItem("eznaa_leads") || "[]");
       queue.push({
         profileEmail: profile.email,
         profileName: profile.name,
         primaryPhone: profile.phone,
-        altPhone: fd.get("altPhone"),
-        service: fd.get("service"),
-        notes: fd.get("notes"),
+        altPhone,
+        service,
+        notes,
         ts: new Date().toISOString(),
       });
       localStorage.setItem("eznaa_leads", JSON.stringify(queue));
-      await new Promise((r) => setTimeout(r, 500));
+
+      const response = await submitConsultation({
+        name: profile.name,
+        email: profile.email,
+        phone: profile.phone,
+        altPhone: altPhone || undefined,
+        service: service || undefined,
+        notes: notes || undefined,
+      });
+
       setDone(true);
-      toast.success("Request received — advisor will call you shortly.");
+      toast.success(response.message || "Request received — advisor will call you shortly.");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "We could not send your consultation request. Please try again.";
+      setError(message);
+      toast.error(message);
     } finally {
       setSubmitting(false);
     }
@@ -68,7 +90,7 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
         <p className="mt-1 text-sm text-muted-foreground">We'll pre-fill your details so you don't have to re-enter them every time.</p>
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-center">
           <button onClick={openModal} className="btn-gold">Sign in / Register</button>
-          <button onClick={openConsultationChat} className="btn-outline">Just chat first</button>
+          <button onClick={openModal} className="btn-outline">Request a callback</button>
         </div>
       </div>
     );
@@ -116,6 +138,13 @@ export function ConsultationRequest({ defaultService, title = "Request a consult
           />
         </label>
       </div>
+
+      {error && (
+        <Alert variant="destructive" className="mt-5">
+          <AlertTitle>We couldn’t send your request</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
 
       <button type="submit" disabled={submitting} className="btn-gold mt-5 w-full transition-transform hover:scale-[1.01]">
         {submitting ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</> : "Request callback"}
