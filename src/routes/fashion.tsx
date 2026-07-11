@@ -5,17 +5,16 @@ import { motion } from "motion/react";
 export const Route = createFileRoute("/fashion")({
   head: () => ({
     meta: [
-      { title: "Fashion & Apparel — Coming Soon | Eznaa Global Mart FZ-LLC" },
+      { title: "Fashion & Apparel | Eznaa Global Mart FZ-LLC" },
       {
         name: "description",
         content:
-          "The Fashion & Apparel division of Eznaa Global Mart FZ-LLC is currently in development.",
+          "Eznaa Global Mart's Fashion & Apparel collection is available on Noon, Amazon UAE and other leading UAE marketplaces. A dedicated site experience is launching soon.",
       },
-      { name: "robots", content: "noindex" },
-      { property: "og:title", content: "Fashion & Apparel — Coming Soon" },
+      { property: "og:title", content: "Fashion & Apparel — Eznaa Global Mart FZ-LLC" },
       {
         property: "og:description",
-        content: "A new premium lifestyle label from the Eznaa group is on the way.",
+        content: "Now available on Noon, Amazon UAE and leading UAE marketplaces.",
       },
     ],
   }),
