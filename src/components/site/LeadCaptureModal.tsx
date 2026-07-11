@@ -23,6 +23,7 @@ export function LeadCaptureModal() {
   const { modalOpen, closeModal, saveProfile, profile } = useLeadProfile();
   const [submitting, setSubmitting] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const editing = !!profile;
 
   useEffect(() => {
@@ -42,6 +43,30 @@ export function LeadCaptureModal() {
     const service = String(fd.get("service") || "").trim();
     const message = String(fd.get("message") || "").trim();
 
+    // Client-side validation
+    const nextErrors: Record<string, string> = {};
+    const nameErr = requireField(name, "Full name");
+    if (nameErr) nextErrors.name = nameErr;
+    const emailErr = validateEmail(email);
+    if (emailErr) nextErrors.email = emailErr;
+    const phoneErr = validatePhone(phone);
+    if (phoneErr) nextErrors.phone = phoneErr;
+
+    // Duplicate detection — only for brand-new registrations, and ignore self when editing
+    if (!nextErrors.email && !nextErrors.phone) {
+      const dup = checkDuplicate(email, phone, editing ? { email: profile?.email, phone: profile?.phone } : undefined);
+      if (dup) {
+        if (/email/i.test(dup)) nextErrors.email = dup;
+        else nextErrors.phone = dup;
+      }
+    }
+
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      toast.error("Please fix the highlighted fields.");
+      return;
+    }
+    setErrors({});
     setSubmitting(true);
 
     try {
@@ -69,8 +94,8 @@ export function LeadCaptureModal() {
         setSuccessOpen(true);
       }
     } catch (err) {
-      const message = err instanceof Error ? err.message : "We could not send your consultation request. Please try again.";
-      toast.error(message);
+      const errMsg = err instanceof Error ? err.message : "We could not send your consultation request. Please try again.";
+      toast.error(errMsg);
     } finally {
       setSubmitting(false);
     }
