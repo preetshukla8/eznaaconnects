@@ -3,6 +3,7 @@ import { X, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { useLeadProfile } from "@/lib/lead-profile";
 import { submitConsultation } from "@/lib/api";
+import { checkDuplicate, requireField, validateEmail, validatePhone } from "@/lib/validation";
 import { PhoneInput } from "./PhoneInput";
 import { SuccessDialog } from "./SuccessDialog";
 
