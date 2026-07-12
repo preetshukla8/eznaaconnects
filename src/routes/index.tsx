@@ -1,3 +1,4 @@
+import "flag-icons/css/flag-icons.min.css";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Briefcase, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
@@ -110,17 +111,39 @@ function ParentGateway() {
               A diversified enterprise with an established presence across the Middle East and India — delivering trusted business, advisory and lifestyle solutions.
             </p>
             <div
-              className="mx-auto mt-4 flex items-center justify-center gap-3 text-lg md:text-xl"
-              aria-label="Countries of operation: UAE, India, Oman, Saudi Arabia"
-            >
-              <span>🇦🇪</span>
-              <span style={{ color: GOLD }}>·</span>
-              <span>🇮🇳</span>
-              <span style={{ color: GOLD }}>·</span>
-              <span>🇴🇲</span>
-              <span style={{ color: GOLD }}>·</span>
-              <span>🇸🇦</span>
-            </div>
+  className="mx-auto mt-4 flex items-center justify-center gap-3"
+  aria-label="Countries of operation: UAE, India, Oman, Saudi Arabia"
+>
+  <span
+    className="fi fi-ae rounded-sm shadow-sm"
+    title="United Arab Emirates"
+    style={{ width: "2rem", height: "1.5rem", backgroundSize: "cover" }}
+  />
+
+  <span style={{ color: GOLD }}>·</span>
+
+  <span
+    className="fi fi-in rounded-sm shadow-sm"
+    title="India"
+    style={{ width: "2rem", height: "1.5rem", backgroundSize: "cover" }}
+  />
+
+  <span style={{ color: GOLD }}>·</span>
+
+  <span
+    className="fi fi-om rounded-sm shadow-sm"
+    title="Oman"
+    style={{ width: "2rem", height: "1.5rem", backgroundSize: "cover" }}
+  />
+
+  <span style={{ color: GOLD }}>·</span>
+
+  <span
+    className="fi fi-sa rounded-sm shadow-sm"
+    title="Saudi Arabia"
+    style={{ width: "2rem", height: "1.5rem", backgroundSize: "cover" }}
+  />
+</div>
           </motion.div>
 
           <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8">
