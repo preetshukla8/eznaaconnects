@@ -4,7 +4,7 @@ import { Logo } from "./Logo";
 
 const EMAIL = "eznaaconnect@gmail.com";
 const UAE_PHONE = "+971552365373";
-const UAE_PHONE_2 = "+971558671162";
+const UAE_PHONE_2 = "+9715580671162";
 const IN_PHONE = "+919799039611";
 
 const COL_SERVICES = [
