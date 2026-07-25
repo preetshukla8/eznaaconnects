@@ -9,47 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as ProfileRouteImport } from './routes/profile'
-import { Route as FashionRouteImport } from './routes/fashion'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ConsultancyRouteImport } from './routes/consultancy'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesVisaServicesRouteImport } from './routes/services.visa-services'
-import { Route as ServicesTaxVatCtRouteImport } from './routes/services.tax-vat-ct'
-import { Route as ServicesCompanySetupRouteImport } from './routes/services.company-setup'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ConsultancyRouteImport } from './routes/consultancy'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FashionRouteImport } from './routes/fashion'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesAccountingComplianceRouteImport } from './routes/services.accounting-compliance'
+import { Route as ServicesCompanySetupRouteImport } from './routes/services.company-setup'
+import { Route as ServicesTaxVatCtRouteImport } from './routes/services.tax-vat-ct'
+import { Route as ServicesVisaServicesRouteImport } from './routes/services.visa-services'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FashionRoute = FashionRouteImport.update({
-  id: '/fashion',
-  path: '/fashion',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConsultancyRoute = ConsultancyRouteImport.update({
-  id: '/consultancy',
-  path: '/consultancy',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -57,25 +32,35 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ConsultancyRoute = ConsultancyRouteImport.update({
+  id: '/consultancy',
+  path: '/consultancy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesVisaServicesRoute = ServicesVisaServicesRouteImport.update({
-  id: '/visa-services',
-  path: '/visa-services',
-  getParentRoute: () => ServicesRoute,
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesTaxVatCtRoute = ServicesTaxVatCtRouteImport.update({
-  id: '/tax-vat-ct',
-  path: '/tax-vat-ct',
-  getParentRoute: () => ServicesRoute,
+const FashionRoute = FashionRouteImport.update({
+  id: '/fashion',
+  path: '/fashion',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesCompanySetupRoute = ServicesCompanySetupRouteImport.update({
-  id: '/company-setup',
-  path: '/company-setup',
-  getParentRoute: () => ServicesRoute,
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesAccountingComplianceRoute =
   ServicesAccountingComplianceRouteImport.update({
@@ -83,6 +68,21 @@ const ServicesAccountingComplianceRoute =
     path: '/accounting-compliance',
     getParentRoute: () => ServicesRoute,
   } as any)
+const ServicesCompanySetupRoute = ServicesCompanySetupRouteImport.update({
+  id: '/company-setup',
+  path: '/company-setup',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesTaxVatCtRoute = ServicesTaxVatCtRouteImport.update({
+  id: '/tax-vat-ct',
+  path: '/tax-vat-ct',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesVisaServicesRoute = ServicesVisaServicesRouteImport.update({
+  id: '/visa-services',
+  path: '/visa-services',
+  getParentRoute: () => ServicesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -185,46 +185,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fashion': {
-      id: '/fashion'
-      path: '/fashion'
-      fullPath: '/fashion'
-      preLoaderRoute: typeof FashionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/consultancy': {
-      id: '/consultancy'
-      path: '/consultancy'
-      fullPath: '/consultancy'
-      preLoaderRoute: typeof ConsultancyRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -234,25 +199,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/consultancy': {
+      id: '/consultancy'
+      path: '/consultancy'
+      fullPath: '/consultancy'
+      preLoaderRoute: typeof ConsultancyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/visa-services': {
-      id: '/services/visa-services'
-      path: '/visa-services'
-      fullPath: '/services/visa-services'
-      preLoaderRoute: typeof ServicesVisaServicesRouteImport
-      parentRoute: typeof ServicesRoute
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/services/tax-vat-ct': {
-      id: '/services/tax-vat-ct'
-      path: '/tax-vat-ct'
-      fullPath: '/services/tax-vat-ct'
-      preLoaderRoute: typeof ServicesTaxVatCtRouteImport
+    '/fashion': {
+      id: '/fashion'
+      path: '/fashion'
+      fullPath: '/fashion'
+      preLoaderRoute: typeof FashionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/accounting-compliance': {
+      id: '/services/accounting-compliance'
+      path: '/accounting-compliance'
+      fullPath: '/services/accounting-compliance'
+      preLoaderRoute: typeof ServicesAccountingComplianceRouteImport
       parentRoute: typeof ServicesRoute
     }
     '/services/company-setup': {
@@ -262,11 +255,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesCompanySetupRouteImport
       parentRoute: typeof ServicesRoute
     }
-    '/services/accounting-compliance': {
-      id: '/services/accounting-compliance'
-      path: '/accounting-compliance'
-      fullPath: '/services/accounting-compliance'
-      preLoaderRoute: typeof ServicesAccountingComplianceRouteImport
+    '/services/tax-vat-ct': {
+      id: '/services/tax-vat-ct'
+      path: '/tax-vat-ct'
+      fullPath: '/services/tax-vat-ct'
+      preLoaderRoute: typeof ServicesTaxVatCtRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/visa-services': {
+      id: '/services/visa-services'
+      path: '/visa-services'
+      fullPath: '/services/visa-services'
+      preLoaderRoute: typeof ServicesVisaServicesRouteImport
       parentRoute: typeof ServicesRoute
     }
   }
