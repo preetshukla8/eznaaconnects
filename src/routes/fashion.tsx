@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Crown, Sparkles, Globe2 } from "lucide-react";
 import { motion } from "motion/react";
-import logoAsset from "@/assets/gagan-milano-logo.jpeg.asset.json";
+import logoAsset from "@/assets/gagan-milano-logo.jpeg";  
 
 export const Route = createFileRoute("/fashion")({
   head: () => ({
@@ -20,8 +20,8 @@ export const Route = createFileRoute("/fashion")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: logoAsset.url },
-      { name: "twitter:image", content: logoAsset.url },
+      { property: "og:image", content: logoAsset },
+      { name: "twitter:image", content: logoAsset },
     ],
   }),
   component: GaganMilanoPage,
@@ -55,7 +55,7 @@ function GaganMilanoPage() {
               className="grid h-11 w-11 place-items-center overflow-hidden rounded-full"
               style={{ border: `1.5px solid ${GOLD}`, background: IVORY_SOFT }}
             >
-              <img src={logoAsset.url} alt="Gagan Milano" className="h-full w-full object-cover" />
+              <img src={logoAsset} alt="Gagan Milano" className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-[1.05rem] font-semibold tracking-[0.18em]" style={{ color: FOREST }}>
@@ -129,7 +129,7 @@ function GaganMilanoPage() {
                   background: IVORY_SOFT,
                 }}
               >
-                <img src={logoAsset.url} alt="Gagan Milano" className="h-full w-full object-cover" />
+                <img src={logoAsset} alt="Gagan Milano" className="h-full w-full object-cover" />
               </div>
             </motion.div>
 
@@ -493,7 +493,7 @@ function GaganMilanoPage() {
               className="grid h-14 w-14 place-items-center overflow-hidden rounded-full"
               style={{ border: `1px solid ${GOLD}`, background: IVORY_SOFT }}
             >
-              <img src={logoAsset.url} alt="Gagan Milano" className="h-full w-full object-cover" />
+              <img src={logoAsset} alt="Gagan Milano" className="h-full w-full object-cover" />
             </div>
             <div>
               <div className="text-lg tracking-[0.22em]" style={{ color: IVORY }}>
